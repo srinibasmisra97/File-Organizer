@@ -28,6 +28,7 @@ _VIDEO_FILE_FORMATS = ['3g2', '3gp', 'avi', 'flv', 'h264', 'm4v', 'mkv', 'mov', 
 _TEXT_FILE_FORMATS = ['doc', 'docx', 'pdf', 'rtf', 'tex', 'txt', 'wpd']
 
 _CHROME_DOWNLOAD = False
+_SAFARI_DOWNLOAD = False
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(msecs)-3d::%(levelname)-8s%(message)s',
@@ -41,33 +42,36 @@ class Handler(FileSystemEventHandler):
 
     @staticmethod
     def on_any_event(event, **kwargs):
-        global _CHROME_DOWNLOAD
+        global _CHROME_DOWNLOAD, _SAFARI_DOWNLOAD
         if event.is_directory:
             return None
         elif event.event_type in ['created', 'modified']:
             file_name = os.path.basename(event.src_path)
-            extension = file_name.split(".")[len(file_name.split(".")) - 1]
+            extension = file_name.lower().split(".")[len(file_name.split(".")) - 1]
+            if os.path.relpath(event.src_path, _WATCH_DIRECTORY) != file_name:
+                return None
             if "com.google.Chrome" in file_name:
                 _CHROME_DOWNLOAD = True
                 return None
             if ".download" in os.path.dirname(event.src_path):
+                _SAFARI_DOWNLOAD = True
                 return None
             if extension in ['crdownload', 'download', 'DS_Store', 'plist']:
                 return None
 
             logging.info("{} {}".format(event.event_type, event.src_path))
 
-            if _CHROME_DOWNLOAD:
+            if _CHROME_DOWNLOAD or _SAFARI_DOWNLOAD:
                 if event.event_type == 'modified':
-                    organizer = Organizer(os.path.dirname(event.src_path))
+                    organizer = Organizer(_WATCH_DIRECTORY)
                     organize(organizer, event.src_path)
-                    _CHROME_DOWNLOAD = False
-        elif event.event_type == 'deleted':
-            logging.info("Deleted {}".format(event.src_path))
-        elif event.event_type == 'moved':
-            logging.info("Moved {}".format(event.src_path))
-        else:
-            logging.warning("Unhandled event type {} on {}".format(event.event_type, event.src_path))
+                    if _CHROME_DOWNLOAD:
+                        _CHROME_DOWNLOAD = False
+                    if _SAFARI_DOWNLOAD:
+                        _SAFARI_DOWNLOAD = False
+            else:
+                organizer = Organizer(_WATCH_DIRECTORY)
+                organize(organizer, event.src_path)
 
 
 class Watcher:
@@ -255,9 +259,11 @@ def parse_command_line_args():
 
 
 def main():
+    global _WATCH_DIRECTORY
     args = parse_command_line_args()
 
     if args.watch:
+        _WATCH_DIRECTORY = args.folder
         watch = Watcher(args.folder)
         watch.run()
     else:
