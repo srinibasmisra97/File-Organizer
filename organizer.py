@@ -1,3 +1,5 @@
+#!/usr/bin/env /Users/srinibasmisra/Documents/Projects/File-Organizer/venv/bin/python
+
 import time
 import os
 import argparse
@@ -6,7 +8,7 @@ from datetime import datetime
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-_WATCH_DIRECTORY = "/Users/srinibasmisra/Documents/Projects/File-Organizer/testFolder"
+_WATCH_DIRECTORY = "/Users/srinibasmisra/Downloads"
 
 _AUDIO_FILE_FORMATS = ['aif', 'cda', 'mid', 'midi', 'mp3', 'mpa', 'ogg', 'wav', 'wma', 'wpl']
 _COMPRESSED_FILE_FORMATS = ['7z', 'arj', 'deb', 'pkg', 'rar', 'rpm', 'tar.gz', 'gz', 'z', 'zip']
@@ -21,16 +23,16 @@ _PROGRAMMING_FILE_FORMATS = ['c', 'cgi', 'pl', 'class', 'cpp', 'cs', 'h', 'java'
                              'asp', 'aspx', 'css', 'htm', 'html', 'js', 'jsp', 'xhtml', 'json']
 _SPREADSHEET_FILE_FORMATS = ['ods', 'xls', 'xlm', 'xlsx']
 _SYSTEM_FILE_FORMATS = ['bak', 'cab', 'cfg', 'cpl', 'cur', 'dll', 'dmp', 'drv', 'icns', 'ini', 'lnk', 'sys', 'tmp']
-_VIDEO_FILE_FORMATS = ['3g2', '3gp', 'avi', 'flv', 'h264', 'm4v', 'mkv', 'mov', 'mp4', 'mpg', 'mpeg', 'rm', 'swf', 'vob', 'wmv']
+_VIDEO_FILE_FORMATS = ['3g2', '3gp', 'avi', 'flv', 'h264', 'm4v', 'mkv', 'mov', 'mp4', 'mpg', 'mpeg', 'rm', 'swf',
+                       'vob', 'wmv']
 _TEXT_FILE_FORMATS = ['doc', 'docx', 'pdf', 'rtf', 'tex', 'txt', 'wpd']
 
 _CHROME_DOWNLOAD = False
 
-
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(msecs)-3d::%(levelname)-8s%(message)s',
                     datefmt='%Y%m%d %H%M%S',
-                    filename='organizer_' + datetime.now().strftime('%Y%m%d') + '.log',
+                    filename='/Users/srinibasmisra/Documents/Projects/File-Organizer/organizer_' + datetime.now().strftime('%Y%m%d') + '.log',
                     filemode='a'
                     )
 
@@ -121,7 +123,7 @@ class Organizer:
         for filename in os.listdir(self.organizeDirectory):
             organize(self, os.path.join(self.organizeDirectory, filename))
         logging.info("Folder organization completed!")
-        
+
 
 def organize(organizer, file_path):
     file_name = os.path.basename(file_path)
@@ -131,72 +133,86 @@ def organize(organizer, file_path):
         if extension in _AUDIO_FILE_FORMATS:
             if not os.path.exists(organizer.audio_files_dir):
                 os.mkdir(organizer.audio_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.audio_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.audio_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.audio_files_dir))
         elif extension in _COMPRESSED_FILE_FORMATS:
             if not os.path.exists(organizer.compressed_files_dir):
                 os.mkdir(organizer.compressed_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.compressed_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.compressed_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.compressed_files_dir))
         elif extension in _DISK_MEDIA_FILE_FORMATS:
             if not os.path.exists(organizer.disk_media_files_dir):
                 os.mkdir(organizer.disk_media_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.disk_media_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.disk_media_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.disk_media_files_dir))
         elif extension in _DATA_DATABASE_FILE_FORMATS:
             if not os.path.exists(organizer.data_database_files_dir):
                 os.mkdir(organizer.data_database_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.data_database_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.data_database_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.data_database_files_dir))
         elif extension in _EMAIL_FILE_FORMATS:
             if not os.path.exists(organizer.email_files_dir):
                 os.mkdir(organizer.email_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.email_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.email_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.email_files_dir))
         elif extension in _EXECUTABLE_FILE_FORMATS:
             if not os.path.exists(organizer.executable_files_dir):
                 os.mkdir(organizer.executable_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.executable_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.executable_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.executable_files_dir))
         elif extension in _FONT_FILE_FORMATS:
             if not os.path.exists(organizer.font_files_dir):
                 os.mkdir(organizer.font_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.font_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.font_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.font_files_dir))
         elif extension in _IMAGE_FILE_FORMATS:
             if not os.path.exists(organizer.image_files_dir):
                 os.mkdir(organizer.image_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.image_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.image_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.image_files_dir))
         elif extension in _PRESENTATION_FILE_FORMATS:
             if not os.path.exists(organizer.presentation_files_dir):
                 os.mkdir(organizer.presentation_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.presentation_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.presentation_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.presentation_files_dir))
         elif extension in _PROGRAMMING_FILE_FORMATS:
             if not os.path.exists(organizer.programming_files_dir):
                 os.mkdir(organizer.programming_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.programming_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.programming_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.programming_files_dir))
         elif extension in _SPREADSHEET_FILE_FORMATS:
             if not os.path.exists(organizer.spreadsheet_files_dir):
                 os.mkdir(organizer.spreadsheet_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.spreadsheet_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.spreadsheet_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.spreadsheet_files_dir))
         elif extension in _SYSTEM_FILE_FORMATS:
             if not os.path.exists(organizer.system_files_dir):
                 os.mkdir(organizer.system_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.system_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.system_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.system_files_dir))
         elif extension in _TEXT_FILE_FORMATS:
             if not os.path.exists(organizer.text_files_dir):
                 os.mkdir(organizer.text_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.text_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.text_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.text_files_dir))
         elif extension in _VIDEO_FILE_FORMATS:
             if not os.path.exists(organizer.video_files_dir):
                 os.mkdir(organizer.video_files_dir)
-            os.rename(os.path.join(organizer.organizeDirectory, file_name), os.path.join(organizer.video_files_dir, file_name))
+            os.rename(os.path.join(organizer.organizeDirectory, file_name),
+                      os.path.join(organizer.video_files_dir, file_name))
             logging.info("Moving {} to {}".format(file_name, organizer.video_files_dir))
     except Exception as e:
         logging.error(str(e))
@@ -220,7 +236,8 @@ def parse_command_line_args():
     parser.add_argument(
         '--folder',
         type=str,
-        required=True,
+        required=False,
+        default=_WATCH_DIRECTORY,
         help="Folder to organize (Provide the absolute path to the folder)"
     )
 
@@ -229,7 +246,7 @@ def parse_command_line_args():
         type=str2bool,
         nargs='?',
         const=True,
-        default=False,
+        default=True,
         required=False,
         help="Enable a watcher on the folder or not"
     )
