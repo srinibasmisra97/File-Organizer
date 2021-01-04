@@ -15,30 +15,30 @@ optional arguments:
 
 ### Files Supported
 
-Audio= `aif, cda, mid, midi, mp3, mpa, ogg, wav, wma, wpl`
+Audio = `aif, cda, mid, midi, mp3, mpa, ogg, wav, wma, wpl`
 
-Compressed= `7z, arj, deb, pkg, rar, rpm, tar.gz, gz, z, zip`
+Compressed = `7z, arj, deb, pkg, rar, rpm, tar.gz, gz, z, zip`
 
-Disk Media= `bin, dmg, iso, toast, vcd`
+Disk Media = `bin, dmg, iso, toast, vcd`
 
-Data and Databases= `csv, dat, db, dbf, log, mdb, sav, sql, tar, xml`
+Data and Databases = `csv, dat, db, dbf, log, mdb, sav, sql, tar, xml`
 
-Email= `email, eml, emlx, msg, oft, ost, pst, vcf`
+Email = `email, eml, emlx, msg, oft, ost, pst, vcf`
 
-Executable= `apk, bat, sh, bin, cgi, com, exe, gadget, jar, command, msi, wsf`
+Executable = `apk, bat, sh, bin, cgi, com, exe, gadget, jar, command, msi, wsf`
 
-Font= `fnt, fon, otf, ttf`
+Font = `fnt, fon, otf, ttf`
 
-Image= `ai, bmp, gif, ico, jpeg, jpg, png, ps, psd, svg, tif, tiff`
+Image = `ai, bmp, gif, ico, jpeg, jpg, png, ps, psd, svg, tif, tiff`
 
-Presentation= `key, odp, pps, ppt, pptx`
+Presentation = `key, odp, pps, ppt, pptx`
 
-Programming= `c, cgi, pl, class, cpp, cs, h, java, php, py, sh, swift, vb, asp, aspx, css, htm, html, js, jsp, xhtml, json`
+Programming = `c, cgi, pl, class, cpp, cs, h, java, php, py, sh, swift, vb, asp, aspx, css, htm, html, js, jsp, xhtml, json`
 
-Spreadsheet= `ods, xls, xlm, xlsx`
+Spreadsheet = `ods, xls, xlm, xlsx`
 
-SYSTEM= `bak, cab, cfg, cpl, cur, dll, dmp, drv, icns, ini, lnk, sys, tmp`
+System = `bak, cab, cfg, cpl, cur, dll, dmp, drv, icns, ini, lnk, sys, tmp`
 
-VIDEO= `3g2, 3gp, avi, flv, h264, m4v, mkv, mov, mp4, mpg, mpeg, rm, swf, vob, wmv`
+Vide = `3g2, 3gp, avi, flv, h264, m4v, mkv, mov, mp4, mpg, mpeg, rm, swf, vob, wmv`
 
-TEXT= `doc, docx, pdf, rtf, tex, txt, wpd`
+Text = `doc, docx, pdf, rtf, tex, txt, wpd`
